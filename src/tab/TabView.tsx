@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Header } from '../components/Header';
 import { MasonryGrid } from '../components/MasonryGrid';
 import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -25,7 +24,6 @@ export function TabView() {
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
   const [isSocialExpanded, setIsSocialExpanded] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [, setCursorText] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,8 +70,6 @@ export function TabView() {
 
   return (
     <div className={`relative w-full min-h-screen bg-black overflow-x-hidden`}>
-      <Header />
-
       <main>
         {/* Animated Name */}
         <div
@@ -136,7 +132,7 @@ export function TabView() {
                       setIsMenuOpen(false);
                       if (item.id === 'info') setIsProfileExpanded(true);
                       if (item.id === 'contact') setIsSocialExpanded(true);
-                      if (item.id === 'resume') window.open('/src/assets/arfath-resume_1_w8jtez.pdf', '_blank');
+                      if (item.id === 'resume') window.open('/resume.pdf', '_blank');
                       if (item.id === 'message') setIsModalOpen(true);
                     }}
                     className="w-14 h-14 flex flex-col items-center justify-center bg-black/5 rounded-xl text-black hover:bg-black hover:text-white transition-all duration-300 active:scale-90 group/item"
@@ -200,7 +196,6 @@ export function TabView() {
         <div className="relative z-10 mt-[150vh] bg-black">
           <MasonryGrid
             onDetailOpenChange={setIsProjectDetailOpen}
-            onProjectHover={(text) => setCursorText(text)}
           />
         </div>
 

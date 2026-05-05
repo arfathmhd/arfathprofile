@@ -1,5 +1,4 @@
 import { useState, useEffect, Fragment } from 'react';
-import { Header } from '../components/Header';
 import { MasonryGrid } from '../components/MasonryGrid';
 import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX } from 'react-icons/fi';
 
@@ -96,7 +95,6 @@ export function DesktopView() {
 
   return (
     <div className={`relative w-full min-h-screen bg-black overflow-x-hidden ${cursorText ? 'cursor-none' : ''}`}>
-      <Header />
 
       {/* Custom Cursor Follower */}
       <div 
@@ -160,7 +158,7 @@ export function DesktopView() {
             <Fragment key={item.id}>
               <button
                 onClick={() => {
-                  if (isResume) window.open('/src/assets/arfath-resume_1_w8jtez.pdf', '_blank');
+                  if (item.id === 'resume') window.open('/resume.pdf', '_blank');
                   if (isMessage && expansion > 0.5) setIsModalOpen(true);
                   if (isInfo && expansion > 0.8) setIsProfileExpanded(!isProfileExpanded);
                 }}
