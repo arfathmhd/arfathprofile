@@ -12,6 +12,14 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ project, i
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Reset state when project changes
+  React.useEffect(() => {
+    setCurrentImageIndex(0);
+    setIsExpanded(false);
+  }, [project]);
+
+  const projectImages = project?.images || (project ? [project.url] : []);
+
   // Handle browser back button and background scroll lock
   React.useEffect(() => {
     if (isOpen) {
@@ -30,9 +38,18 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ project, i
     }
   }, [isOpen, onClose]);
 
-  if (!isOpen || !project) return null;
+  // Auto-slide functionality
+  React.useEffect(() => {
+    if (isOpen && project && projectImages.length > 1 && !isExpanded) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % projectImages.length);
+      }, 2000); // 5 seconds
 
-  const projectImages = project.images || [project.url];
+      return () => clearInterval(interval);
+    }
+  }, [isOpen, project, projectImages.length, isExpanded]);
+
+  if (!isOpen || !project) return null;
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -134,11 +151,13 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ project, i
             {project.specs && (
               <div>
                 <p className="font-['Dot_Matrix'] text-[10px] text-zinc-400 uppercase tracking-[0.4em] mb-6">Technical Specifications</p>
-                <div className="grid grid-cols-1 gap-4">
+                <div className="flex flex-wrap gap-3">
                   {project.specs.map((spec, index) => (
-                    <div key={index} className="flex items-center gap-4 group">
-                      <span className="w-1 h-1 rounded-full bg-zinc-300 group-hover:bg-black transition-colors" />
-                      <span className="font-['Dot_Matrix'] text-xs text-zinc-700 uppercase tracking-widest">
+                    <div 
+                      key={index} 
+                      className="px-4 py-2.5 bg-black rounded-lg border border-white/10 hover:border-white/30 transition-all duration-300 group"
+                    >
+                      <span className="font-['Dot_Matrix'] text-[10px] text-white/70 group-hover:text-white uppercase tracking-widest transition-colors">
                         {spec}
                       </span>
                     </div>
@@ -151,16 +170,23 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({ project, i
           {/* Right Column: Actions & Details */}
           {/* Right Column: Actions */}
           <div className="flex flex-col justify-center items-center md:items-end h-full">
-            <button
-              onClick={() => window.open(project.projectUrl || '#', '_blank')}
-              className="group relative px-12 py-6 bg-black rounded-full overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-2xl shadow-black/20"
-            >
-              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              <div className="relative flex items-center gap-4">
-                <span className="font-['Dot_Matrix'] text-white text-[10px] md:text-xs uppercase tracking-[0.5em]">Live Link</span>
-                <div className="w-8 h-[1px] bg-white/30 group-hover:w-12 transition-all duration-500" />
+            {project.projectUrl ? (
+              <button
+                onClick={() => window.open(project.projectUrl, '_blank')}
+                className="group relative px-12 py-6 bg-black rounded-full overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 shadow-2xl shadow-black/20"
+              >
+                <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                <div className="relative flex items-center gap-4">
+                  <span className="font-['Dot_Matrix'] text-white text-[10px] md:text-xs uppercase tracking-[0.5em]">Live Link</span>
+                  <div className="w-8 h-[1px] bg-white/30 group-hover:w-12 transition-all duration-500" />
+                </div>
+              </button>
+            ) : (
+              <div className="flex items-center gap-4 px-10 py-5 bg-zinc-50 rounded-full border border-zinc-100">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span className="font-['Dot_Matrix'] text-zinc-500 text-[10px] md:text-xs uppercase tracking-[0.5em]">Ongoing Work</span>
               </div>
-            </button>
+            )}
           </div>
         </div>
       </div>

@@ -15,15 +15,15 @@ export const photos: Photo[] = [
   // --- DYNAMIC PROJECTS ---
   {
     id: '1',
-    url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1776505670/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_fujuqs.png',
-    alt: 'Entrazone ERP',
+    url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777980465/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_1_zhg4fn.png',
+    alt: 'Entrazone Ed-Tech',
     aspectRatio: 'portrait',
     projectUrl: 'https://www.entrazone.in',
     title: 'Entrazone',
     category: 'dynamic',
-    specs: ['Python', 'Django', 'React', 'Business Analytics', 'PostgreSQL', 'ERP Features'],
-    description: 'An advanced enterprise platform offering data-driven insights and streamlined management for business growth.',
-    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776512349/1_wqqq0r.png']
+    specs: ['Python Django', 'React + Vite', 'Tailwind CSS', 'PostgreSQL', 'Razorpay', 'OTP Auth', 'VPS Hosting'],
+    description: 'A high-performance full-stack Ed-Tech platform featuring secure OTP authentication, Razorpay integration, live class scheduling, and mentor booking. Built with a responsive UI and a dedicated admin dashboard for seamless course and content management.',
+    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1777980465/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_1_zhg4fn.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777981274/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_2_jvdl4p.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777981275/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_4_p7vfcf.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777981274/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_3_guzzfs.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777981277/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_5_otnfdw.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777981277/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_6_fhigak.png']
   },
   {
     id: '2',
@@ -33,45 +33,45 @@ export const photos: Photo[] = [
     projectUrl: 'https://eloramatrimony.com/',
     title: 'Elora Matrimony',
     category: 'dynamic',
-    specs: ['Matching Algorithms', 'Django', 'Secure Auth', 'React Native', 'Payment Gateway'],
-    description: 'A secure and personalized matrimonial platform designed to help users find compatible life partners through smart filtering.',
-    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776504858/Green_Modern_Phone_Mockup_with_Hand_Your_Story_p2ye2l.png']
-  },
+    specs: ['Django', 'React + Redux', 'PostgreSQL', 'WebSockets', 'Aadhar & OTP Auth', 'AWS EC2', 'CloudFront'],
+    description: 'A robust matrimonial platform featuring secure Aadhar verification, interest-based match filtering, and real-time chat powered by WebSockets. Optimized for high performance with AWS EC2 backend and S3/CloudFront frontend hosting.',
+    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1777873053/Untitled_design_1_ooygdo.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777982616/Beige_Minimalist_Website_and_Desktop_Mockup_Instagram_Post_4_zk749v.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777982524/Beige_Minimalist_Website_and_Desktop_Mockup_Instagram_Post_1_fb2bru.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777982526/Beige_Minimalist_Website_and_Desktop_Mockup_Instagram_Post_2_yunqxt.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777982529/Beige_Minimalist_Website_and_Desktop_Mockup_Instagram_Post_b9hv8d.png']
+  },  
   {
     id: '3',
-    url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777876821/Untitled_design_2_f87sun.png',
-    alt: 'Zipfit',
-    aspectRatio: 'landscape',
-    projectUrl: 'https://www.stellazwoman.com/',
-    title: 'Zipfit',
+    url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777912822/Blue_Modern_Mobile_Mockup_Instagram_Post_ultc2d.png',
+    alt: 'Wayyo Backend Architecture',
+    aspectRatio: 'portrait',
+    title: 'Wayyo',
     category: 'dynamic',
-    specs: ['E-commerce', 'Inventory Management', 'Razorpay/Stripe', 'Python', 'Tailwind'],
-    description: 'A premium boutique e-commerce store with over 1,900 products, featuring sophisticated filtering and a seamless shopping cart.',
-    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776505670/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_fujuqs.png']
+    specs: ['Django REST Framework', 'PostgreSQL/PostGIS', 'Docker & Nginx', 'Stripe Integration'],
+    description: 'Architected and developed a robust Geo-spatial backend for the Wayyo mobile app. Implemented high-performance nearby-place search using PostGIS, secure social authentication (Google/Apple/FB), and a complete Stripe payment lifecycle for event bookings.',
+    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1777912822/Blue_Modern_Mobile_Mockup_Instagram_Post_ultc2d.png']
   },
+
   {
     id: '4',
     url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777877349/Untitled_design_3_l89ilr.png',
-    alt: 'Employee Hub',
+    alt: 'EmpHub HR Backend',
     aspectRatio: 'portrait',
-    projectUrl: 'https://weinberinc.com/',
-    title: 'Employee Hub',
+    projectUrl: 'https://emphubhr.com/',
+    title: 'EmpHub HR',
     category: 'dynamic',
-    specs: ['Product Catalog', 'Global Dealer Locator', 'Automotive Tech', 'SEO Optimized'],
-    description: 'Corporate platform for a global leader in automotive surface protection, showcasing nano-ceramic coatings and detailing tools.',
-    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776506852/Black_and_White_Minimalist_New_Website_Launch_Instagram_Post_yxcopp.png']
+    specs: ['Django REST Framework', 'PostgreSQL', 'JWT Auth', 'Docker & Nginx', 'Task Workflows', 'HR Management'],
+    description: 'A massive ERP backend architected with 7 Django apps to manage employees, multi-type task tracking (Mechanic/Delivery/Service), attendance with break timers, and vehicle assignments. Features a sophisticated leave approval workflow and document management system.',
+    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1777877349/Untitled_design_3_l89ilr.png']
   },
   {
     id: '5',
     url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777877824/Cream_Minimalist_Laptop_Mockup_Promotion_Instagram_Post_zzeps4.png',
     alt: 'Stellaz Woman',
     aspectRatio: 'square',
-    projectUrl: 'https://veluxinc.com/',
+    projectUrl: 'https://www.stellazwoman.com/',
     title: 'Stellaz Woman',
     category: 'dynamic',
-    specs: ['Scalable Architecture', 'Django', 'React', 'Dynamic Content'],
-    description: 'High-end corporate website highlighting architectural daylight solutions and sustainable building environments.',
-    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776507861/Black_Modern_Website_Launch_Promotion_Mockup_Instagram_Post_qy3aph.png']
+    specs: ['Shopify Plus', 'Liquid', 'Custom Theme Development', 'E-commerce', 'Payment Gateway', 'Inventory Management'],
+    description: 'A premium fashion e-commerce platform built on Shopify, featuring a fully custom theme, high-conversion checkout flow, and integrated logistics for a seamless shopping experience.',
+    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1777877824/Cream_Minimalist_Laptop_Mockup_Promotion_Instagram_Post_zzeps4.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777983821/Cream_Minimalist_Laptop_Mockup_Promotion_Instagram_Post_2_aju7le.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777983822/Cream_Minimalist_Laptop_Mockup_Promotion_Instagram_Post_l3nt3t.png','https://res.cloudinary.com/djwvgejge/image/upload/v1777983836/Cream_Minimalist_Laptop_Mockup_Promotion_Instagram_Post_1_i4kly0.png']
   },
   {
     id: '6',
@@ -83,20 +83,21 @@ export const photos: Photo[] = [
     category: 'dynamic',
     specs: ['Next.js', 'Vercel', 'Software Training Portal', 'Service Booking'],
     description: 'An IT training and software development platform bridging the gap between academia and industry with real-world projects.',
-    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776508354/Dark_Modern_Business_Report_Presentation_Device_Product_Mockup_Instagram_Post_dfbosl.png']
+    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1777880023/1_l0awop.png']
   },
-  {
+    {
     id: '7',
-    url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777912822/Blue_Modern_Mobile_Mockup_Instagram_Post_ultc2d.png',
-    alt: 'wayyo',
-    aspectRatio: 'portrait',
-    projectUrl: 'https://cipherpeak.vercel.app/',
-    title: 'Wayyo',
+    url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777876821/Untitled_design_2_f87sun.png',
+    alt: 'Zipfit',
+    aspectRatio: 'landscape',
+    projectUrl: 'https://www.stellazwoman.com/',
+    title: 'Zipfit',
     category: 'dynamic',
-    specs: ['Next.js', 'Vercel', 'Software Training Portal', 'Service Booking'],
-    description: 'An IT training and software development platform bridging the gap between academia and industry with real-world projects.',
-    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776508354/Dark_Modern_Business_Report_Presentation_Device_Product_Mockup_Instagram_Post_dfbosl.png']
+    specs: ['E-commerce', 'Inventory Management', 'Razorpay/Stripe', 'Python', 'Tailwind'],
+    description: 'A premium boutique e-commerce store with over 1,900 products, featuring sophisticated filtering and a seamless shopping cart.',
+    images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776505670/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_fujuqs.png']
   },
+
   {
     id: '8',
     url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777913214/Minimalist_Website_Launch_Computer_Mockup_Instagram_Post_nkkt6t.png',

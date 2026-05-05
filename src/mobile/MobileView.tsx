@@ -202,7 +202,7 @@ export function MobileView() {
               className="fixed inset-0 bg-black/40 backdrop-blur-sm animate-in fade-in duration-500"
               onClick={() => setIsSocialExpanded(false)}
             />
-            <div className="relative bg-white rounded-2xl p-4 shadow-2xl flex items-center gap-6 animate-in zoom-in-95 duration-300">
+            <div className="relative bg-white rounded-2xl p-4 shadow-2xl flex items-center gap-6 animate-in zoom-in-95 duration-300 text-black">
               {socialItems.map((social) => {
                 const Icon = social.icon;
                 return (

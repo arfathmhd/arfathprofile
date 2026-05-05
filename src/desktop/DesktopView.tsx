@@ -1,6 +1,7 @@
 import { useState, useEffect, Fragment } from 'react';
 import { MasonryGrid } from '../components/MasonryGrid';
-import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX } from 'react-icons/fi';
+import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronDown, FiChevronRight } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const iconMap = {
   info: FiInfo,
@@ -21,6 +22,8 @@ export function DesktopView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProjectDetailOpen, setIsProjectDetailOpen] = useState(false);
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
+  const [isSocialExpanded, setIsSocialExpanded] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [cursorText, setCursorText] = useState('');
 
@@ -49,7 +52,7 @@ export function DesktopView() {
 
   // Handle background scroll lock for modals
   useEffect(() => {
-    if (isModalOpen || isProfileExpanded || isProjectDetailOpen) {
+    if (isModalOpen || isProfileExpanded || isProjectDetailOpen || isSocialExpanded || isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -57,7 +60,7 @@ export function DesktopView() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isModalOpen, isProfileExpanded, isProjectDetailOpen]);
+  }, [isModalOpen, isProfileExpanded, isProjectDetailOpen, isSocialExpanded, isMenuOpen]);
 
   // Set default cursor text for hero section
   useEffect(() => {
@@ -84,9 +87,9 @@ export function DesktopView() {
   ];
 
   const socialItems = [
-    { id: 'li', label: 'LINKEDIN', icon: 'li', url: 'https://www.linkedin.com/in/muhammed-arfath-98a8b9262/' },
-    { id: 'ig', label: 'INSTAGRAM', icon: 'ig', url: 'https://www.instagram.com/ar__f4th/' },
-    { id: 'wa', label: 'WHATSAPP', icon: 'wa', url: 'https://wa.me/917907224281' }
+    { id: 'li', label: 'LINKEDIN', icon: FiLinkedin, url: 'https://www.linkedin.com/in/muhammed-arfath-98a8b9262/' },
+    { id: 'ig', label: 'INSTAGRAM', icon: FiInstagram, url: 'https://www.instagram.com/ar__f4th/' },
+    { id: 'wa', label: 'WHATSAPP', icon: FaWhatsapp, url: 'https://wa.me/917907224281' }
   ];
 
   // Dynamic dimensions for expanded profile
@@ -142,145 +145,131 @@ export function DesktopView() {
           </h1>
         </div>
 
-        {/* Action Buttons & Socials (Desktop Only) */}
-        {!isProjectDetailOpen && actionItems.map((item) => {
-          const IconComponent = iconMap[item.id];
-          const startX = `calc(50% + (${item.ix} / 1440 * 100vw))`;
-          const startY = 'calc(50% - clamp(5rem, 15vh, 10rem))';
-          const isInfo = item.id === 'info';
-          const isContact = item.id === 'contact';
-          const isResume = item.id === 'resume';
-          const isMessage = item.id === 'message';
+        {/* Unified Action Menu (The Single Arrow) */}
+        {!isProjectDetailOpen && (
+          <div 
+            className={`fixed left-0 top-1/2 -translate-y-1/2 z-[100] flex items-center transition-[transform,opacity] duration-700 ease-out will-change-[transform,opacity]
+              ${scrollProgress > 0.1 ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 -translate-x-5 pointer-events-none'}`}
+          >
+            {/* The Trigger Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="bg-white text-black w-12 h-40 rounded-r-[2rem] flex flex-col items-center justify-center shadow-[10px_0_30px_rgba(0,0,0,0.2)] transition-all duration-300 active:scale-95 border-r border-t border-b border-white/50"
+            >
+              <div className={`transition-transform duration-500 ${isMenuOpen ? 'rotate-180' : 'rotate-0'}`}>
+                {isMenuOpen ? <FiX size={24} /> : <FiChevronRight size={24} className="animate-pulse" />}
+              </div>
+              <span className="[writing-mode:vertical-lr] rotate-180 uppercase font-['Dot_Matrix'] text-[10px] tracking-[0.3em] mt-6 font-bold opacity-70">
+                {isMenuOpen ? 'CLOSE' : 'ACTIONS'}
+              </span>
+            </button>
 
-          const expansion = nameProgress;
-
-          return (
-            <Fragment key={item.id}>
-              <button
-                onClick={() => {
-                  if (item.id === 'resume') window.open('/resume.pdf', '_blank');
-                  if (isMessage && expansion > 0.5) setIsModalOpen(true);
-                  if (isInfo && expansion > 0.8) setIsProfileExpanded(!isProfileExpanded);
-                }}
-                className={`fixed group overflow-hidden border border-white/30 border-dotted flex items-center justify-center text-white bg-white/5 transition-all duration-700 ease-out ${isMessage && expansion > 0.5 ? 'hover:bg-white hover:text-black cursor-pointer' : (isResume || isInfo || isContact) && expansion > 0.5 ? 'cursor-pointer' : 'cursor-default'}`}
-                style={{
-                  zIndex: (isInfo && isProfileExpanded) ? 150 : 40,
-                  width: (isInfo && isProfileExpanded) ? profileWidth : (isInfo ? `calc(3rem + 80px * ${expansion})` : isContact ? `calc(3rem + 120px * ${expansion})` : isResume ? `calc(3rem + 60px * ${expansion})` : isMessage ? `calc(3rem + 140px * ${expansion})` : '3rem'),
-                  height: (isInfo && isProfileExpanded) ? profileHeight : (isInfo ? `calc(3rem + 110px * ${expansion})` : isContact ? `calc(3rem + 100px * ${expansion})` : isResume ? `calc(3rem + 80px * ${expansion})` : isMessage ? `calc(3rem + 16px * ${expansion})` : '3rem'),
-                  left: (isInfo && isProfileExpanded) ? '50%' : (isInfo || isResume ? `calc(${startX} + (${item.tx} + 60px * ${expansion} - ${startX}) * ${iconProgress})`
-                    : isContact || isMessage ? `calc(${startX} + (${item.tx} - 60px * ${expansion} - ${startX}) * ${iconProgress})`
-                      : `calc(${startX} + (${item.tx} - ${startX}) * ${iconProgress})`),
-                  top: (isInfo && isProfileExpanded) ? '50%' : (isInfo || isContact ? `calc(${startY} + (${item.ty} + 80px * ${expansion} - ${startY}) * ${iconProgress})`
-                    : (isResume || isMessage) ? `calc(${startY} + (${item.ty} - 80px * ${expansion} - ${startY}) * ${iconProgress})`
-                      : `calc(${startY} + (${item.ty} - ${startY}) * ${iconProgress})`),
-                  borderRadius: (isInfo || isContact || isResume || isMessage) ? `calc(9999px + (0.5rem - 9999px) * ${expansion})` : '9999px',
-                  transform: `translate(-50%, -50%) rotate(${(isInfo && isProfileExpanded) ? '360deg' : '0deg'})`,
-                }}
-              >
-                {/* Info Photo */}
-                {isInfo && (
-                  <div className={`absolute inset-0 w-full h-full ${isProfileExpanded ? 'pointer-events-auto' : 'pointer-events-none'}`} style={{ opacity: expansion }}>
-                    <div className={`w-full h-full transition-all duration-700 flex ${isProfileExpanded ? 'opacity-100' : 'opacity-10 group-hover:opacity-100'}`}>
-                      {/* Photo Column */}
-                      <div className={`${isProfileExpanded ? 'w-1/2' : 'w-full'} h-full relative transition-all duration-700 overflow-hidden`}>
-                        <img src="https://res.cloudinary.com/djwvgejge/image/upload/v1769756425/FA4E5312-5C79-47D2-BB5B-E5A2D138F3ED_tpprqa.png" className="w-full h-full object-cover" alt="Profile" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                        <div className="absolute bottom-6 left-6 text-left">
-                          <p className="text-white/90 text-xs uppercase tracking-widest font-['Dot_Matrix']">
-                            {'Software Engineer'}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Description Column */}
-                      {isProfileExpanded && (
-                        <div className="w-1/2 h-full bg-white p-6 md:p-12 flex flex-col justify-center text-left animate-in fade-in slide-in-from-right duration-700 border-l border-zinc-100 overflow-y-auto relative">
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setIsProfileExpanded(false);
-                            }}
-                            className="absolute top-6 right-6 text-zinc-400 hover:text-black transition-colors"
-                          >
-                            <FiX size={24} />
-                          </button>
-                          <h3 className="font-['Dot_Matrix'] text-black text-2xl md:text-3xl uppercase tracking-widest mb-6">Professional Profile</h3>
-                          <p className="font-sans text-zinc-600 text-sm leading-relaxed mb-8">
-                            I am a Software Engineer dedicated to building robust and scalable digital solutions. I bridge the gap between technical complexity and high-performance engineering, focusing on stability, efficiency, and future-proof architecture.
-                          </p>
-                          <div className="space-y-6">
-                            <div>
-                              <p className="font-['Dot_Matrix'] text-zinc-400 text-[10px] uppercase tracking-[0.3em] mb-2">Focus</p>
-                              <p className="text-zinc-800 text-xs uppercase tracking-wider">Full-stack Engineering & Architecture</p>
-                            </div>
-                            <div>
-                              <p className="font-['Dot_Matrix'] text-zinc-400 text-[10px] uppercase tracking-[0.3em] mb-2">Expertise</p>
-                              <p className="text-zinc-800 text-xs uppercase tracking-wider">React / TypeScript / Creative Coding</p>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Social/Contact Links */}
-                {isContact && (
-                  <div
-                    className="absolute inset-0 w-full h-full p-2 transition-opacity duration-300"
-                    style={{
-                      opacity: expansion > 0.5 ? 1 : 0,
-                      pointerEvents: expansion > 0.8 ? 'auto' : 'none'
+            {/* The Menu Panel */}
+            <div 
+              className={`ml-4 bg-white/95 backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 shadow-[20px_0_50px_rgba(0,0,0,0.3)] flex flex-col p-2 gap-3 border border-white/20
+                ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10 pointer-events-none'}`}
+            >
+              {actionItems.map(item => {
+                const Icon = iconMap[item.id];
+                const labels = { info: 'Profile', contact: 'Connect', resume: 'Resume', message: 'Contact' };
+                return (
+                  <button 
+                    key={item.id}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      if (item.id === 'info') setIsProfileExpanded(true);
+                      if (item.id === 'contact') setIsSocialExpanded(true);
+                      if (item.id === 'resume') window.open('/resume.pdf', '_blank');
+                      if (item.id === 'message') setIsModalOpen(true);
                     }}
+                    className="w-14 h-14 flex flex-col items-center justify-center bg-black/5 rounded-xl text-black hover:bg-black hover:text-white transition-all duration-300 active:scale-90 group/item"
                   >
-                    <div className="w-full h-full bg-white/90 rounded-sm flex flex-col justify-center p-3 shadow-inner">
-                      {socialItems.map((social) => (
-                        <div
-                          key={social.id}
-                          onClick={(e) => {
-                            e.stopPropagation(); // Prevents inner click from bubbling up to the main button
-                            window.open(social.url, '_blank');
-                          }}
-                          className="flex items-center justify-between w-full py-2 px-2 rounded hover:bg-black/5 transition-colors cursor-pointer pointer-events-auto"
-                        >
-                          <span className="text-[11px] font-bold uppercase tracking-[0.15em] font-['Dot_Matrix'] text-black/80">{social.label}</span>
-                          <span className="text-[10px] font-bold uppercase tracking-[0.1em] font-['Dot_Matrix'] text-black/50">{social.icon}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                    <Icon size={20} className="mb-1" />
+                    <span className="text-[7px] uppercase font-bold tracking-tighter opacity-60 group-hover/item:opacity-100">{labels[item.id]}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
-                {/* Resume Preview */}
-                {isResume && (
-                  <div className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: expansion }}>
-                    <div className="w-full h-full bg-white/10 p-2 transition-opacity duration-300 opacity-10 group-hover:opacity-100">
-                      <div className="w-full h-full bg-white/90 rounded-sm flex flex-col p-3 shadow-inner">
-                        <div className="w-full h-1 bg-black/10 mb-1" /><div className="w-2/3 h-1 bg-black/10 mb-3" />
-                        <div className="flex-1 border-t border-black/5 pt-2 flex flex-col gap-1">
-                          {[1, 2, 3].map(i => <div key={i} className={`h-[2px] bg-black/5 ${i % 2 === 0 ? 'w-full' : 'w-4/5'}`} />)}
-                        </div>
-                        <span className="text-[6px] text-black/40 font-bold uppercase mt-auto">Resume.pdf</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Message Text */}
-                {isMessage && (
-                  <div className="absolute inset-0 flex items-center justify-center whitespace-nowrap overflow-hidden" style={{ opacity: expansion }}>
-                    <span className="text-[12px] font-bold uppercase tracking-[0.3em] font-['Dot_Matrix']">{'Contact Us'}</span>
-                  </div>
-                )}
-
-                {/* Original Icon */}
-                <div style={{ opacity: expansion > 0.8 && (isInfo || isContact || isResume || isMessage) ? 0 : 1 }}>
-                  <IconComponent size={20} />
-                </div>
+        {/* Profile Overlay - Unified Standalone Modal */}
+        {isProfileExpanded && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+            <div
+              className="fixed inset-0 bg-black/60 backdrop-blur-md animate-in fade-in duration-700"
+              onClick={() => setIsProfileExpanded(false)}
+            />
+            <div className="relative w-full max-w-4xl h-[70vh] bg-white rounded-[2.5rem] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.5)] animate-in slide-in-from-bottom-20 duration-700 flex flex-row">
+              <button 
+                onClick={() => setIsProfileExpanded(false)}
+                className="absolute top-6 right-6 z-50 bg-black/20 backdrop-blur-md text-white p-2 rounded-full hover:bg-black/40 transition-colors"
+              >
+                <FiX size={24} />
               </button>
-            </Fragment>
-          );
-        })}
+
+              {/* Photo Area */}
+              <div className="w-1/2 h-full relative overflow-hidden">
+                <img src="https://res.cloudinary.com/djwvgejge/image/upload/v1769756425/FA4E5312-5C79-47D2-BB5B-E5A2D138F3ED_tpprqa.png" className="w-full h-full object-cover object-top" alt="Profile" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                <div className="absolute bottom-10 left-10 text-left">
+                  <p className="text-white/60 text-xs uppercase tracking-[0.4em] font-['Dot_Matrix'] mb-2">
+                    Software Engineer
+                  </p>
+                  <h2 className="text-white text-5xl font-['Dot_Matrix'] uppercase tracking-widest">Arfath</h2>
+                </div>
+              </div>
+
+              {/* Description Area */}
+              <div className="flex-1 bg-white p-16 flex flex-col justify-center text-left overflow-y-auto">
+                <h3 className="font-['Dot_Matrix'] text-black text-2xl uppercase tracking-[0.3em] mb-8 border-b border-black/5 pb-4">Professional Profile</h3>
+                <p className="font-sans text-zinc-600 text-lg leading-relaxed mb-10">
+                  I am a Software Engineer dedicated to building robust and scalable digital solutions. I bridge the gap between technical complexity and high-performance engineering, focusing on stability, efficiency, and future-proof architecture.
+                </p>
+                <div className="grid grid-cols-2 gap-10">
+                  <div>
+                    <p className="font-['Dot_Matrix'] text-zinc-400 text-[10px] uppercase tracking-[0.3em] mb-3">Focus</p>
+                    <p className="text-zinc-800 text-sm uppercase tracking-wider font-bold">Full-stack & Architecture</p>
+                  </div>
+                  <div>
+                    <p className="font-['Dot_Matrix'] text-zinc-400 text-[10px] uppercase tracking-[0.3em] mb-3">Location</p>
+                    <p className="text-zinc-800 text-sm uppercase tracking-wider font-bold">India</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Social Overlay - Unified Modal */}
+        {isSocialExpanded && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+            <div 
+              className="fixed inset-0 bg-black/60 backdrop-blur-md animate-in fade-in duration-500"
+              onClick={() => setIsSocialExpanded(false)}
+            />
+            <div className="relative bg-white rounded-[2rem] p-10 shadow-2xl flex items-center gap-12 animate-in zoom-in-95 duration-300 text-black">
+              {socialItems.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <button
+                    key={social.id}
+                    onClick={() => {
+                      window.open(social.url, '_blank');
+                      setIsSocialExpanded(false);
+                    }}
+                    className="flex flex-col items-center gap-4 group/social"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-black/5 flex items-center justify-center group-hover/social:bg-black group-hover/social:text-white transition-all duration-300">
+                      <Icon size={32} />
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] font-['Dot_Matrix']">{social.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Contact Modal */}
         {isModalOpen && (
@@ -325,7 +314,7 @@ export function DesktopView() {
           />
         </div>
 
-        {/* Profile Overlay - Background Click to Close */}
+        {/* Profile Overlay - Background Click to Close (For Unified Model) */}
         {isProfileExpanded && (
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[140] transition-opacity duration-700 animate-in fade-in"
