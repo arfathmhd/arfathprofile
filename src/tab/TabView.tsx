@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { MasonryGrid } from '../components/MasonryGrid';
-import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronUp, FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const iconMap = {
@@ -101,19 +101,30 @@ export function TabView() {
         {/* Unified Action Menu (The Single Arrow) */}
         {!isProjectDetailOpen && (
           <div 
-            className="fixed z-[100] flex flex-col items-center transition-all duration-700 ease-out pointer-events-none"
+            className="fixed left-0 top-1/2 -translate-y-1/2 z-[100] flex items-center transition-all duration-700 ease-out pointer-events-none"
             style={{ 
-              left: '50%',
-              bottom: '0',
               opacity: scrollProgress > 0.1 ? 1 : 0,
-              transform: `translate(-50%, ${scrollProgress > 0.1 ? '0' : '20px'})`,
+              transform: `translateX(${scrollProgress > 0.1 ? '0' : '-20px'})`,
               pointerEvents: scrollProgress > 0.1 ? 'auto' : 'none'
             }}
           >
+            {/* The Trigger Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="bg-white text-black w-12 h-40 rounded-r-[2rem] flex flex-col items-center justify-center shadow-[10px_0_30px_rgba(0,0,0,0.2)] transition-all duration-300 active:scale-95 border-r border-t border-b border-white/50"
+            >
+              <div className={`transition-transform duration-500 ${isMenuOpen ? 'rotate-180' : 'rotate-0'}`}>
+                {isMenuOpen ? <FiX size={24} /> : <FiChevronRight size={24} className="animate-pulse" />}
+              </div>
+              <span className="[writing-mode:vertical-lr] rotate-180 uppercase font-['Dot_Matrix'] text-[10px] tracking-[0.3em] mt-6 font-bold opacity-70">
+                {isMenuOpen ? 'CLOSE' : 'ACTIONS'}
+              </span>
+            </button>
+
             {/* The Menu Panel */}
             <div 
-              className={`mb-4 bg-white/95 backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 shadow-[0_-20px_50px_rgba(0,0,0,0.3)] flex flex-row p-2 gap-3 border border-white/20
-                ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+              className={`ml-4 bg-white/95 backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 shadow-[20px_0_50px_rgba(0,0,0,0.3)] flex flex-col p-2 gap-3 border border-white/20
+                ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10 pointer-events-none'}`}
             >
               {actionItems.map(item => {
                 const Icon = iconMap[item.id];
@@ -128,7 +139,7 @@ export function TabView() {
                       if (item.id === 'resume') window.open('/src/assets/arfath-resume_1_w8jtez.pdf', '_blank');
                       if (item.id === 'message') setIsModalOpen(true);
                     }}
-                    className="w-16 h-16 flex flex-col items-center justify-center bg-black/5 rounded-xl text-black hover:bg-black hover:text-white transition-all duration-300 active:scale-90 group/item"
+                    className="w-14 h-14 flex flex-col items-center justify-center bg-black/5 rounded-xl text-black hover:bg-black hover:text-white transition-all duration-300 active:scale-90 group/item"
                   >
                     <Icon size={20} className="mb-1" />
                     <span className="text-[7px] uppercase font-bold tracking-tighter opacity-60 group-hover/item:opacity-100">{labels[item.id]}</span>
@@ -136,19 +147,6 @@ export function TabView() {
                 );
               })}
             </div>
-
-            {/* The Trigger Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="bg-white text-black w-48 h-10 rounded-t-2xl flex items-center justify-center gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.2)] transition-all duration-300 active:scale-95 border-l border-t border-r border-white/50"
-            >
-              <div className={`transition-transform duration-500 ${isMenuOpen ? 'rotate-180' : 'rotate-0'}`}>
-                {isMenuOpen ? <FiX size={18} /> : <FiChevronUp size={18} className="animate-pulse" />}
-              </div>
-              <span className="uppercase font-['Dot_Matrix'] text-[10px] tracking-[0.3em] font-bold opacity-70">
-                {isMenuOpen ? 'CLOSE' : 'ACTIONS'}
-              </span>
-            </button>
           </div>
         )}
 
