@@ -130,6 +130,8 @@ export function DesktopView() {
             top: `calc(50% + (clamp(2rem, 5vh, 4rem) - 50%) * ${nameProgress})`,
             left: `calc(50% + (clamp(1.5rem, 3vw, 3rem) - 50%) * ${nameProgress})`,
             transform: `translate(calc(-50% + 50% * ${nameProgress}), calc(-50% + 50% * ${nameProgress}))`,
+            opacity: isProjectDetailOpen ? 0 : 1,
+            transition: 'opacity 0.3s ease-in-out'
           }}
         >
           <h1
@@ -187,7 +189,7 @@ export function DesktopView() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
                         <div className="absolute bottom-6 left-6 text-left">
                           <p className="text-white/90 text-xs uppercase tracking-widest font-['Dot_Matrix']">
-                            {'Dev & Designer'}
+                            {'Software Engineer'}
                           </p>
                         </div>
                       </div>
@@ -204,15 +206,14 @@ export function DesktopView() {
                           >
                             <FiX size={24} />
                           </button>
-                          <h3 className="font-['Dot_Matrix'] text-black text-2xl md:text-3xl uppercase tracking-widest mb-6">About Me</h3>
+                          <h3 className="font-['Dot_Matrix'] text-black text-2xl md:text-3xl uppercase tracking-widest mb-6">Professional Profile</h3>
                           <p className="font-sans text-zinc-600 text-sm leading-relaxed mb-8">
-                            I am a Software Engineer and Designer passionate about creating immersive digital experiences. 
-                            I bridge the gap between technical complexity and beautiful interaction, focusing on performance, accessibility, and high-end aesthetics.
+                            I am a Software Engineer dedicated to building robust and scalable digital solutions. I bridge the gap between technical complexity and high-performance engineering, focusing on stability, efficiency, and future-proof architecture.
                           </p>
                           <div className="space-y-6">
                             <div>
                               <p className="font-['Dot_Matrix'] text-zinc-400 text-[10px] uppercase tracking-[0.3em] mb-2">Focus</p>
-                              <p className="text-zinc-800 text-xs uppercase tracking-wider">Full-stack Dev & UI Architecture</p>
+                              <p className="text-zinc-800 text-xs uppercase tracking-wider">Full-stack Engineering & Architecture</p>
                             </div>
                             <div>
                               <p className="font-['Dot_Matrix'] text-zinc-400 text-[10px] uppercase tracking-[0.3em] mb-2">Expertise</p>
@@ -311,9 +312,9 @@ export function DesktopView() {
         {/* Hero Section Background */}
         <div className="fixed top-0 left-0 w-full h-screen bg-black z-0 flex flex-col items-center justify-center">
           <div className="absolute top-[calc(50%+clamp(8rem,15vh,12rem))] flex flex-col items-center text-center px-4 w-full z-20" style={{ opacity: 1 - nameProgress }}>
-            <h2 className="text-white/90 tracking-[0.4em] uppercase text-sm md:text-xl lg:text-2xl font-medium mb-6">Software Engineer & Designer</h2>
-            <p className="text-white/60 font-sans text-sm md:text-lg lg:text-xl max-w-3xl font-light leading-relaxed px-4 md:px-0">
-              Crafting immersive digital experiences and bringing bold ideas to life through code, aesthetics, and interaction.
+            <h2 className="text-white/90 tracking-[0.4em] uppercase text-sm md:text-xl lg:text-2xl font-medium mb-6">Software Engineer</h2>
+            <p className="text-white/60 font-sans text-sm md:text-lg lg:text-xl max-w-4xl font-light leading-relaxed px-4 md:px-0">
+              Building robust, scalable digital solutions with a focus on technical excellence and high-performance architecture. I specialize in bridging complex engineering challenges with seamless user experiences across the full stack, ensuring every line of code contributes to a stable and future-proof digital ecosystem.
             </p>
           </div>
         </div>

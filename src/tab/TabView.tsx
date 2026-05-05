@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { MasonryGrid } from '../components/MasonryGrid';
-import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronLeft } from 'react-icons/fi';
+import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const iconMap = {
@@ -54,7 +54,6 @@ export function TabView() {
     };
   }, [isModalOpen, isProfileExpanded, isProjectDetailOpen, isSocialExpanded, isMenuOpen]);
 
-  const iconProgress = Math.min(scrollProgress * 2, 1);
   const nameProgress = Math.max(0, (scrollProgress - 0.5) * 2);
 
   const actionItems: ActionItem[] = [
@@ -70,7 +69,6 @@ export function TabView() {
     { id: 'wa', label: 'WHATSAPP', icon: FaWhatsapp, url: 'https://wa.me/917907224281' }
   ];
 
-  const isTabMode = nameProgress > 0.5;
 
   return (
     <div className={`relative w-full min-h-screen bg-black overflow-x-hidden`}>
@@ -84,6 +82,8 @@ export function TabView() {
             top: `calc(50% + (clamp(1.5rem, 4vh, 2rem) - 50%) * ${nameProgress})`,
             left: '50%',
             transform: `translate(-50%, -50%)`,
+            opacity: isProjectDetailOpen ? 0 : 1,
+            transition: 'opacity 0.3s ease-in-out'
           }}
         >
           <h1
@@ -97,39 +97,23 @@ export function TabView() {
         </div>
 
         {/* Action Buttons (Appearing during scroll animation) */}
-        {!isProjectDetailOpen && !isTabMode && actionItems.map((item) => {
-          const IconComponent = iconMap[item.id];
-          const startX = `calc(50% + ${item.ix}px)`;
-          const startY = 'calc(50% - 5rem)';
-          const isLeftTab = item.id === 'info' || item.id === 'resume';
-
-          return (
-            <button
-              key={item.id}
-              className="fixed group overflow-hidden flex items-center justify-center transition-all duration-700 ease-out border border-white/30 border-dotted text-white bg-white/5"
-              style={{
-                zIndex: 40,
-                width: `calc(2.5rem + ${item.id === 'info' ? 70 : item.id === 'contact' ? 100 : item.id === 'resume' ? 50 : 120}px * ${nameProgress})`,
-                height: `calc(2.5rem + ${item.id === 'info' ? 90 : item.id === 'contact' ? 90 : item.id === 'resume' ? 70 : 10}px * ${nameProgress})`,
-                left: `calc(${startX} + (${item.id === 'info' || item.id === 'resume' ? '0%' : '100%'} ${isLeftTab ? '+' : '-'} 40px * ${nameProgress} - ${startX}) * ${iconProgress})`,
-                top: `calc(${startY} + (${item.ty} ${isLeftTab ? '+' : '-'} 50px * ${nameProgress} - ${startY}) * ${iconProgress})`,
-                borderRadius: `calc(9999px + (0.5rem - 9999px) * ${nameProgress})`,
-                transform: `translate(-50%, -50%)`,
-                opacity: 1 - (nameProgress * 2) 
-              }}
-            >
-              <IconComponent size={16} />
-            </button>
-          );
-        })}
 
         {/* Unified Action Menu (The Single Arrow) */}
-        {!isProjectDetailOpen && isTabMode && (
-          <div className="fixed right-0 top-1/2 -translate-y-1/2 z-[100] flex items-center">
+        {!isProjectDetailOpen && (
+          <div 
+            className="fixed z-[100] flex flex-col items-center transition-all duration-700 ease-out pointer-events-none"
+            style={{ 
+              left: '50%',
+              bottom: '0',
+              opacity: scrollProgress > 0.1 ? 1 : 0,
+              transform: `translate(-50%, ${scrollProgress > 0.1 ? '0' : '20px'})`,
+              pointerEvents: scrollProgress > 0.1 ? 'auto' : 'none'
+            }}
+          >
             {/* The Menu Panel */}
             <div 
-              className={`mr-4 bg-white/95 backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col p-2 gap-3 border border-white/20
-                ${isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10 pointer-events-none'}`}
+              className={`mb-4 bg-white/95 backdrop-blur-xl rounded-2xl overflow-hidden transition-all duration-500 shadow-[0_-20px_50px_rgba(0,0,0,0.3)] flex flex-row p-2 gap-3 border border-white/20
+                ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
             >
               {actionItems.map(item => {
                 const Icon = iconMap[item.id];
@@ -144,7 +128,7 @@ export function TabView() {
                       if (item.id === 'resume') window.open('/src/assets/arfath-resume_1_w8jtez.pdf', '_blank');
                       if (item.id === 'message') setIsModalOpen(true);
                     }}
-                    className="w-14 h-14 flex flex-col items-center justify-center bg-black/5 rounded-xl text-black hover:bg-black hover:text-white transition-all duration-300 active:scale-90 group/item"
+                    className="w-16 h-16 flex flex-col items-center justify-center bg-black/5 rounded-xl text-black hover:bg-black hover:text-white transition-all duration-300 active:scale-90 group/item"
                   >
                     <Icon size={20} className="mb-1" />
                     <span className="text-[7px] uppercase font-bold tracking-tighter opacity-60 group-hover/item:opacity-100">{labels[item.id]}</span>
@@ -156,12 +140,12 @@ export function TabView() {
             {/* The Trigger Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="bg-white text-black w-12 h-64 rounded-l-[2rem] flex flex-col items-center justify-center shadow-[-10px_0_30px_rgba(0,0,0,0.2)] transition-all duration-300 active:scale-95 border-l border-t border-b border-white/50"
+              className="bg-white text-black w-48 h-10 rounded-t-2xl flex items-center justify-center gap-3 shadow-[0_-10px_30px_rgba(0,0,0,0.2)] transition-all duration-300 active:scale-95 border-l border-t border-r border-white/50"
             >
               <div className={`transition-transform duration-500 ${isMenuOpen ? 'rotate-180' : 'rotate-0'}`}>
-                {isMenuOpen ? <FiX size={24} /> : <FiChevronLeft size={24} className="animate-pulse" />}
+                {isMenuOpen ? <FiX size={18} /> : <FiChevronUp size={18} className="animate-pulse" />}
               </div>
-              <span className="[writing-mode:vertical-lr] rotate-180 uppercase font-['Dot_Matrix'] text-[10px] tracking-[0.3em] mt-6 font-bold opacity-70">
+              <span className="uppercase font-['Dot_Matrix'] text-[10px] tracking-[0.3em] font-bold opacity-70">
                 {isMenuOpen ? 'CLOSE' : 'ACTIONS'}
               </span>
             </button>
@@ -195,11 +179,22 @@ export function TabView() {
 
         {/* Hero Section Background */}
         <div className="fixed top-0 left-0 w-full h-screen bg-black z-0 flex flex-col items-center justify-center">
-          <div className="absolute top-[calc(50%+6rem)] flex flex-col items-center text-center px-6 w-full z-20" style={{ opacity: 1 - nameProgress }}>
-            <h2 className="text-white/90 tracking-[0.3em] uppercase text-xs font-medium mb-4">Software Engineer & Designer</h2>
-            <p className="text-white/60 font-sans text-sm max-w-md font-light leading-relaxed">
-              Crafting immersive digital experiences and bringing bold ideas to life through code, aesthetics, and interaction.
+          <div className="absolute top-[calc(50%+clamp(5rem,10vh,8rem))] flex flex-col items-center text-center px-6 w-full z-20" style={{ opacity: 1 - nameProgress }}>
+            <h2 className="text-white/90 tracking-[0.3em] uppercase text-xs font-medium mb-4">Software Engineer</h2>
+            <p className="text-white/60 font-sans text-[13px] max-w-sm font-light leading-relaxed">
+              Building robust, scalable digital solutions with a focus on technical excellence and high-performance architecture. I specialize in bridging complex engineering challenges with seamless user experiences across the full stack.
             </p>
+          </div>
+
+          {/* Scroll Indicator */}
+          <div 
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 transition-opacity duration-700"
+            style={{ opacity: 1 - (scrollProgress * 4) }}
+          >
+            <span className="font-['Dot_Matrix'] text-[9px] text-white/30 uppercase tracking-[0.4em]">Scroll</span>
+            <div className="animate-mouse-scroll">
+              <FiChevronDown className="text-white/40" size={20} />
+            </div>
           </div>
         </div>
 
@@ -262,7 +257,7 @@ export function TabView() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 text-left">
                   <p className="text-white/60 text-[10px] uppercase tracking-[0.4em] font-['Dot_Matrix'] mb-1">
-                    Creator / Engineer
+                    Software Engineer
                   </p>
                   <h2 className="text-white text-2xl font-['Dot_Matrix'] uppercase tracking-widest">Arfath</h2>
                 </div>
@@ -270,10 +265,9 @@ export function TabView() {
 
               {/* Description Area */}
               <div className="flex-1 bg-white p-8 flex flex-col justify-start text-left overflow-y-auto">
-                <h3 className="font-['Dot_Matrix'] text-black text-sm uppercase tracking-[0.3em] mb-6 border-b border-black/5 pb-2">About Me</h3>
+                <h3 className="font-['Dot_Matrix'] text-black text-sm uppercase tracking-[0.3em] mb-6 border-b border-black/5 pb-2">Professional Profile</h3>
                 <p className="font-sans text-zinc-600 text-[14px] leading-relaxed mb-8">
-                  I am a Software Engineer and Designer passionate about creating immersive digital experiences.
-                  I bridge the gap between technical complexity and beautiful interaction, focusing on performance and aesthetics.
+                  I am a Software Engineer dedicated to building robust and scalable digital solutions. I bridge the gap between technical complexity and high-performance engineering, focusing on stability, efficiency, and future-proof architecture.
                 </p>
                 <div className="grid grid-cols-2 gap-6">
                   <div>
