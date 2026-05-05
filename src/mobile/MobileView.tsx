@@ -97,12 +97,8 @@ export function MobileView() {
         {/* Unified Action Menu (The Single Arrow) */}
         {!isProjectDetailOpen && (
           <div 
-            className="fixed left-0 top-1/2 -translate-y-1/2 z-[100] flex items-center transition-all duration-700 ease-out pointer-events-none"
-            style={{ 
-              opacity: scrollProgress > 0.1 ? 1 : 0,
-              transform: `translateX(${scrollProgress > 0.1 ? '0' : '-20px'})`,
-              pointerEvents: scrollProgress > 0.1 ? 'auto' : 'none'
-            }}
+            className={`fixed left-0 top-1/2 -translate-y-1/2 z-[100] flex items-center transition-[transform,opacity] duration-700 ease-out will-change-[transform,opacity]
+              ${scrollProgress > 0.1 ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 -translate-x-5 pointer-events-none'}`}
           >
             {/* The Trigger Button */}
             <button
