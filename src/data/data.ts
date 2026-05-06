@@ -54,7 +54,6 @@ export const photos: Photo[] = [
     url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777877349/Untitled_design_3_l89ilr.png',
     alt: 'EmpHub HR Backend',
     aspectRatio: 'portrait',
-    projectUrl: 'https://emphubhr.com/',
     title: 'EmpHub HR',
     category: 'dynamic',
     specs: ['Django REST Framework', 'PostgreSQL', 'JWT Auth', 'Docker & Nginx', 'Task Workflows', 'HR Management'],
@@ -81,8 +80,8 @@ export const photos: Photo[] = [
     projectUrl: 'https://cipherpeak.vercel.app/',
     title: 'Erp Software',
     category: 'dynamic',
-    specs: ['Next.js', 'Vercel', 'Software Training Portal', 'Service Booking'],
-    description: 'An IT training and software development platform bridging the gap between academia and industry with real-world projects.',
+    specs: ['React', 'TailwindCSS', 'TypeScript', 'Redux', 'Axios', 'Python', 'Django', 'REST API', 'PostgreSQL', 'OpenAI Chat System'],
+    description: 'A comprehensive full-stack ERP solution featuring a React-based frontend and a robust Django backend. Integrated with PostgreSQL for data management and featuring an intelligent OpenAI-powered chat system for automated support and task handling.',
     images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1777880023/1_l0awop.png']
   },
     {
@@ -90,11 +89,10 @@ export const photos: Photo[] = [
     url: 'https://res.cloudinary.com/djwvgejge/image/upload/v1777876821/Untitled_design_2_f87sun.png',
     alt: 'Zipfit',
     aspectRatio: 'landscape',
-    projectUrl: 'https://www.stellazwoman.com/',
     title: 'Zipfit',
     category: 'dynamic',
-    specs: ['E-commerce', 'Inventory Management', 'Razorpay/Stripe', 'Python', 'Tailwind'],
-    description: 'A premium boutique e-commerce store with over 1,900 products, featuring sophisticated filtering and a seamless shopping cart.',
+    specs: ['Next.js', 'TailwindCSS', 'TypeScript', 'Python', 'Django', 'REST API', 'E-commerce', 'Payment Integration'],
+    description: 'A high-performance e-commerce platform engineered with Next.js and TailwindCSS. Powered by a Django REST API backend, it manages an extensive inventory of over 1,900 products with seamless payment processing and advanced filtering.',
     images: ['https://res.cloudinary.com/djwvgejge/image/upload/v1776505670/Purple_Gradient_Modern_Laptop_Mockup_Instagram_Post_fujuqs.png']
   },
 
@@ -106,8 +104,8 @@ export const photos: Photo[] = [
     projectUrl: 'https://veluxinc.com/',
     title: 'Velux Inc',
     category: 'dynamic',
-    specs: ['Next.js', 'Vercel', 'Software Training Portal', 'Service Booking'],
-    description: 'An IT training and software development platform bridging the gap between academia and industry with real-world projects.'
+    specs: ['React', 'TailwindCSS', 'TypeScript', 'Axios', 'Service Booking', 'Software Solutions'],
+    description: 'A sophisticated corporate platform developed with React and TypeScript. It utilizes TailwindCSS for a premium aesthetic and Axios for robust API communications, providing an efficient software training and service booking experience.'
   },
   {
     id: '9',
@@ -117,8 +115,8 @@ export const photos: Photo[] = [
     projectUrl: 'https://weinberinc.com/',
     title: 'Weinber',
     category: 'dynamic',
-    specs: ['Next.js', 'Vercel', 'Software Training Portal', 'Service Booking'],
-    description: 'An IT training and software development platform bridging the gap between academia and industry with real-world projects.'
+    specs: ['React', 'TailwindCSS', 'TypeScript', 'Axios', 'Service Booking', 'Software Engineering'],
+    description: 'A modern IT training and software development ecosystem built with React and TypeScript. It leverages TailwindCSS for a clean, minimalist UI and Axios for seamless backend integration, helping students master real-world project workflows.'
   },
   // --- STATIC PROJECTS ---
   {
@@ -129,8 +127,8 @@ export const photos: Photo[] = [
     projectUrl: 'https://www.lankavalley.in/',
     title: 'Lanka Valley',
     category: 'static',
-    specs: ['Lakeside UI Design', 'Booking Inquiry', 'Responsive Photos'],
-    description: 'Tranquil resort website featuring lakeside cottage-style villas and authentic Kerala hospitality at Cheloor Lake.'
+    specs: ['React', 'TailwindCSS', 'TypeScript', 'Axios', 'Google Review API', 'Booking Inquiry'],
+    description: 'A premium hospitality website for Lanka Valley Resort, developed with React and TypeScript. It features a tranquil lakeside UI, integrated booking inquiry systems using Axios, and authentic social proof via the Google Review API.'
   },
   {
     id: '11',
@@ -140,8 +138,8 @@ export const photos: Photo[] = [
     projectUrl: 'https://aavishkararchitects.com/',
     title: 'Aavishkar Architects',
     category: 'static',
-    specs: ['3D Visualization Portfolio', 'Modern UI', 'Cochin Design'],
-    description: 'Minimalist architecture portfolio showcasing innovative structural designs, including India\'s first two-storey container restaurant.'
+    specs: ['React', 'Vite', 'TailwindCSS', 'Hostinger', '3D Visualization', 'Architecture Portfolio'],
+    description: 'A high-performance minimalist architecture portfolio built with React and Vite. Deployed on Hostinger, it features a sleek TailwindCSS design to showcase innovative structural projects, including India\'s first two-storey container restaurant.'
   },
   {
     id: '12',
@@ -151,8 +149,8 @@ export const photos: Photo[] = [
     projectUrl: 'https://www.aveesfoods.com/',
     title: 'Avees Foods',
     category: 'static',
-    specs: ['Product Showcase', 'Global Export Info', 'Kerala Heritage'],
-    description: 'Heritage-focused food product site for authentic Kuttanadan rice powders and masalas, reaching over 10 countries.'
+    specs: ['React', 'TailwindCSS', 'Hostinger', 'Responsive Design', 'Product Showcase'],
+    description: 'A heritage-focused responsive food product site developed with React and TailwindCSS. Hosted on Hostinger, it provides a premium digital presence for authentic Kuttanadan products reaching over 10 countries.'
   },
   {
     id: '13',
@@ -162,7 +160,7 @@ export const photos: Photo[] = [
     projectUrl: 'https://www.aamyshomestay.com/',
     title: 'Aamys Homestay',
     category: 'static',
-    specs: ['Kerala Tourism Certified', 'Google Maps Integration', 'Heritage UI'],
-    description: 'Golden Category heritage homestay website in Alleppey, offering an immersive cultural experience in an 80-year-old house.'
+    specs: ['React', 'TailwindCSS', 'Hostinger', 'Responsive Design', 'Google Maps Integration'],
+    description: 'A premium responsive website for a heritage homestay in Alleppey, built using React and TailwindCSS. Hosted on Hostinger, it provides a seamless user experience with integrated maps for this Golden Category cultural destination.'
   },
 ];
