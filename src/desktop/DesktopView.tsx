@@ -1,6 +1,6 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import { MasonryGrid } from '../components/MasonryGrid';
-import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronDown, FiChevronRight } from 'react-icons/fi';
+import { FiInfo, FiUser, FiFileText, FiMessageCircle, FiX, FiLinkedin, FiInstagram, FiChevronRight } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const iconMap = {
@@ -76,7 +76,7 @@ export function DesktopView() {
   }, [scrollProgress, cursorText]);
 
 
-  const iconProgress = Math.min(scrollProgress * 2, 1);
+
   const nameProgress = Math.max(0, (scrollProgress - 0.5) * 2);
 
   const actionItems: ActionItem[] = [
@@ -92,9 +92,7 @@ export function DesktopView() {
     { id: 'wa', label: 'WHATSAPP', icon: FaWhatsapp, url: 'https://wa.me/917907224281' }
   ];
 
-  // Dynamic dimensions for expanded profile
-  const profileWidth = 'clamp(600px, 85vw, 1000px)';
-  const profileHeight = 'clamp(400px, 80vh, 650px)';
+
 
   return (
     <div className={`relative w-full min-h-screen bg-black overflow-x-hidden ${cursorText ? 'cursor-none' : ''}`}>

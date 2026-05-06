@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { photos, type Photo } from '../data/data';
 import { ProjectDetailPage } from './ProjectDetailPage';
 
@@ -16,7 +16,7 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({ onDetailOpenChange, on
   // Explicitly group photos to ensure they are rendered separately and in order
   const dynamicPhotos = photos.filter(photo => photo.category === 'dynamic');
   const staticPhotos = photos.filter(photo => photo.category === 'static');
-  const allPhotos = [...dynamicPhotos, ...staticPhotos];
+
 
 
   const handleProjectClick = (photo: Photo) => {
